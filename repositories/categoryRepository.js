@@ -11,6 +11,16 @@ export default class CategoryRepository {
         })
     }
 
+    static getCategory() {
+        return new Promise((resolve, reject) => {
+            const sql = 'SELECT * FROM categories'
+            db.query(sql, (err, result) => {
+                if (err) return reject(err);
+                resolve(result);
+            })
+        })
+    }
+
     static getCategorybById(id) {
         return new Promise((resolve, reject) => {
             const sql = 'SELECT * FROM categories WHERE id = ?'

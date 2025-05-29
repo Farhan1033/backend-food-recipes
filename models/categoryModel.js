@@ -18,6 +18,10 @@ export default class CategoryModel {
         return CategoryRepository.getCategorybById(id);
     }
 
+    static getCategory() {
+        return CategoryRepository.getCategory();
+    }
+
     static deleteCategory(id) {
         return CategoryRepository.deleteCategory(id);
     }

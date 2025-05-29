@@ -27,6 +27,21 @@ export default class CategoryController {
         }
     }
 
+    static async getCategory(req, res) {
+        try {
+            const categoryData = await CategoryModel.getCategory();
+
+            res.status(200).json({
+                message: 'Berhasil mengambil data kategori',
+                category: categoryData
+            })
+        } catch (error) {
+            res.status(500).json({
+                error: error.message,
+            })
+        }
+    }
+
     static async getCategoryId(req, res) {
         try {
             const { id } = req.params;
