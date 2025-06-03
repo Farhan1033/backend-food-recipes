@@ -4,6 +4,8 @@ import RecipeIngredientController from "../controllers/recipeIngredientControlle
 const recipeIngredientRoute = express.Router();
 
 recipeIngredientRoute.post('/create-recipe-ingredient', RecipeIngredientController.createRecipeIngredient);
+recipeIngredientRoute.post('/add-multiple-ingredients', RecipeIngredientController.addMultipleRecipeIngredients);
+recipeIngredientRoute.post('/replace-recipe-ingredients', RecipeIngredientController.replaceRecipeIngredients);
 recipeIngredientRoute.get('/recipe/:recipeId', RecipeIngredientController.getIngredientsByRecipeId);
 recipeIngredientRoute.get('/:id', RecipeIngredientController.getRecipeIngredientById);
 recipeIngredientRoute.get('/', RecipeIngredientController.getRecipeIngredients);

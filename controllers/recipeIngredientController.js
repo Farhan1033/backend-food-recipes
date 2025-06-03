@@ -145,4 +145,108 @@ export default class RecipeIngredientController {
             })
         }
     }
+
+    static async addMultipleRecipeIngredients(req, res) {
+        try {
+            const { recipe_id, ingredients } = req.body;
+
+            if (!recipe_id) {
+                return res.status(400).json({
+                    message: 'Recipe ID harus diisi'
+                })
+            }
+
+            if (!ingredients || !Array.isArray(ingredients) || ingredients.length === 0) {
+                return res.status(400).json({
+                    message: 'Ingredients harus berupa array dan tidak boleh kosong'
+                })
+            }
+
+            // Validasi setiap ingredient
+            for (let ingredient of ingredients) {
+                if (!ingredient.ingredient_id || !ingredient.quantity) {
+                    return res.status(400).json({
+                        message: 'Setiap ingredient harus memiliki ingredient_id dan quantity'
+                    })
+                }
+            }
+
+            // Generate ID untuk setiap ingredient
+            const recipeIngredients = ingredients.map(ingredient => ({
+                id: uuidv4(),
+                recipe_id: recipe_id,
+                ingredient_id: ingredient.ingredient_id,
+                quantity: ingredient.quantity,
+                unit: ingredient.unit || null
+            }));
+
+            await RecipeIngredientModel.createMultipleRecipeIngredients(recipeIngredients);
+
+            res.status(200).json({
+                message: 'Berhasil menambahkan multiple recipe ingredients',
+                recipeIngredients: recipeIngredients
+            })
+        } catch (error) {
+            res.status(500).json({
+                error: error.message,
+            })
+        }
+    }
+
+    static async replaceRecipeIngredients(req, res) {
+        try {
+            const { recipe_id, ingredients } = req.body;
+
+            if (!recipe_id) {
+                return res.status(400).json({
+                    message: 'Recipe ID harus diisi'
+                })
+            }
+
+            if (!ingredients || !Array.isArray(ingredients)) {
+                return res.status(400).json({
+                    message: 'Ingredients harus berupa array'
+                })
+            }
+
+            // Hapus semua ingredients lama untuk recipe ini
+            await RecipeIngredientModel.deleteIngredientsByRecipeId(recipe_id);
+
+            // Jika ada ingredients baru, tambahkan
+            if (ingredients.length > 0) {
+                // Validasi setiap ingredient
+                for (let ingredient of ingredients) {
+                    if (!ingredient.ingredient_id || !ingredient.quantity) {
+                        return res.status(400).json({
+                            message: 'Setiap ingredient harus memiliki ingredient_id dan quantity'
+                        })
+                    }
+                }
+
+                // Generate ID untuk setiap ingredient
+                const recipeIngredients = ingredients.map(ingredient => ({
+                    id: uuidv4(),
+                    recipe_id: recipe_id,
+                    ingredient_id: ingredient.ingredient_id,
+                    quantity: ingredient.quantity,
+                    unit: ingredient.unit || null
+                }));
+
+                await RecipeIngredientModel.createMultipleRecipeIngredients(recipeIngredients);
+
+                res.status(200).json({
+                    message: 'Berhasil mengganti recipe ingredients',
+                    recipeIngredients: recipeIngredients
+                })
+            } else {
+                res.status(200).json({
+                    message: 'Berhasil menghapus semua recipe ingredients',
+                })
+            }
+        } catch (error) {
+            res.status(500).json({
+                error: error.message,
+            })
+        }
+    }
 }

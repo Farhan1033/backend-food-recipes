@@ -14,6 +14,6 @@ app.use(express.json());
 app.use('/api/category', categoryRoute)
 app.use('/api/ingredient', ingredientRoute)
 app.use('/api/recipes', recipeRoute)
-app.use('/api/recipe-ingredeint', recipeIngredientRoute)
+app.use('/api/recipe-ingredient', recipeIngredientRoute)
 
 app.listen(PORT);
