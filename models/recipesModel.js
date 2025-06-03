@@ -1,5 +1,5 @@
 // models/recipeModel.js
-import RecipeRepository from "../repositories/recipeRepository.js";
+import RecipeRepository from "../repositories/recipesRepository.js";
 
 export default class RecipeModel {
     constructor(id, title, description, steps, image_url, category_id, created_at) {
