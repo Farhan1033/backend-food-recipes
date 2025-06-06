@@ -43,7 +43,9 @@ export default class RecipeModel {
             recipeData.description,
             recipeData.steps,
             recipeData.image_url,
-            recipeData.category_id
+            recipeData.category_id,
+            recipeData.cooking_time,
+            recipeData.portions
         );
     }
 

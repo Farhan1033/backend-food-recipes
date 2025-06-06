@@ -126,15 +126,15 @@ export default class RecipeIngredientController {
 
     static async deleteRecipeIngredient(req, res) {
         try {
-            const { id } = req.body;
+            const { recipe_id } = req.body;
 
-            if (!id) {
+            if (!recipe_id) {
                 return res.status(400).json({
                     message: 'ID tidak ditemukan'
                 })
             }
 
-            await RecipeIngredientModel.deleteRecipeIngredient(id);
+            await RecipeIngredientModel.deleteRecipeIngredient(recipe_id);
 
             res.status(200).json({
                 message: 'Berhasil menghapus recipe ingredient',
