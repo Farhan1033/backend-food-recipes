@@ -5,6 +5,6 @@ const ingredientRoute = express.Router();
 
 ingredientRoute.post('/create-ingredient', IngredientController.createIngredient)
 ingredientRoute.get('/', IngredientController.getIngredient)
-ingredientRoute.post('/delete-ingredient', IngredientController.deleteIngredient)
+ingredientRoute.delete('/delete-ingredient', IngredientController.deleteIngredient)
 
 export default ingredientRoute;

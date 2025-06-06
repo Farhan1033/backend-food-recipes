@@ -2,10 +2,10 @@
 import db from "../config/db.js";
 
 export default class RecipeRepository {
-    static addRecipe(id, title, description, steps, image_url, category_id, created_at) {
+    static addRecipe(id, title, description, steps, image_url, category_id, created_at, cooking_time, portions) {
         return new Promise((resolve, reject) => {
-            const sql = 'INSERT INTO recipes (id, title, description, steps, image_url, category_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)'
-            db.query(sql, [id, title, description, steps, image_url, category_id, created_at], (err, result) => {
+            const sql = 'INSERT INTO recipes (id, title, description, steps, image_url, category_id, cooking_time, portions, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            db.query(sql, [id, title, description, steps, image_url, category_id, created_at, cooking_time, portions], (err, result) => {
                 if (err) return reject(err);
                 resolve(result);
             })
@@ -42,10 +42,10 @@ export default class RecipeRepository {
         })
     }
 
-    static updateRecipe(id, title, description, steps, image_url, category_id) {
+    static updateRecipe(id, title, description, steps, image_url, category_id, cooking_time, portions) {
         return new Promise((resolve, reject) => {
-            const sql = 'UPDATE recipes SET title = ?, description = ?, steps = ?, image_url = ?, category_id = ? WHERE id = ?'
-            db.query(sql, [title, description, steps, image_url, category_id, id], (err, result) => {
+            const sql = 'UPDATE recipes SET title = ?, description = ?, steps = ?, image_url = ?, category_id = ?, cooking_time = ?, portions = ? WHERE id = ?'
+            db.query(sql, [title, description, steps, image_url, category_id, cooking_time, portions, id], (err, result) => {
                 if (err) return reject(err);
                 resolve(result);
             })

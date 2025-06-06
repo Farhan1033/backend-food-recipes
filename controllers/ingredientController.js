@@ -43,7 +43,7 @@ export default class IngredientController {
 
     static async deleteIngredient(req, res) {
         try {
-            const { id } = req.params;
+            const { id } = req.body;
 
             if (!id) {
                 return res.status(400).json({

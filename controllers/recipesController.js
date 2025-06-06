@@ -6,7 +6,7 @@ import RecipeIngredientModel from "../models/recipeIngredientModel.js";
 export default class RecipeController {
     static async createRecipe(req, res) {
         try {
-            const { title, description, steps, image_url, category_id, ingredients } = req.body;
+            const { title, description, steps, image_url, category_id, cooking_time, portions, ingredients } = req.body;
 
             if (!title || !description || !steps || !category_id) {
                 return res.status(400).json({ message: 'Title, description, steps, dan category_id harus diisi' })
@@ -15,7 +15,7 @@ export default class RecipeController {
             const id = uuidv4();
             const created_at = new Date();
 
-            const recipeData = new RecipeModel(id, title, description, steps, image_url, category_id, created_at);
+            const recipeData = new RecipeModel(id, title, description, steps, image_url, category_id, cooking_time, portions, created_at);
 
             await RecipeModel.createRecipe(recipeData);
 
@@ -96,7 +96,7 @@ export default class RecipeController {
     static async updateRecipe(req, res) {
         try {
             const { id } = req.params;
-            const { title, description, steps, image_url, category_id, ingredients } = req.body;
+            const { title, description, steps, image_url, category_id, cooking_time, portions, ingredients } = req.body;
 
             if (!id) {
                 return res.status(400).json({
@@ -108,7 +108,7 @@ export default class RecipeController {
                 return res.status(400).json({ message: 'Title, description, steps, dan category_id harus diisi' })
             }
 
-            const recipeData = { title, description, steps, image_url, category_id };
+            const recipeData = { title, description, steps, image_url, category_id, cooking_time, portions };
 
             await RecipeModel.updateRecipe(id, recipeData);
 

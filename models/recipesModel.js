@@ -2,13 +2,15 @@
 import RecipeRepository from "../repositories/recipesRepository.js";
 
 export default class RecipeModel {
-    constructor(id, title, description, steps, image_url, category_id, created_at) {
+    constructor(id, title, description, steps, image_url, category_id, cooking_time, portions, created_at) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.steps = steps;
         this.image_url = image_url;
         this.category_id = category_id;
+        this.cooking_time = cooking_time;
+        this.portions = portions;
         this.created_at = created_at;
     }
 
@@ -20,6 +22,8 @@ export default class RecipeModel {
             recipeData.steps,
             recipeData.image_url,
             recipeData.category_id,
+            recipeData.cooking_time,
+            recipeData.portions,
             recipeData.created_at
         );
     }
