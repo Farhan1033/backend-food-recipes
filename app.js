@@ -11,9 +11,16 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/category', categoryRoute)
-app.use('/api/ingredient', ingredientRoute)
-app.use('/api/recipes', recipeRoute)
-app.use('/api/recipe-ingredient', recipeIngredientRoute)
+app.use('/api/category', categoryRoute);
+app.use('/api/ingredient', ingredientRoute);
+app.use('/api/recipes', recipeRoute);
+app.use('/api/recipe-ingredient', recipeIngredientRoute);
 
-app.listen(PORT);
+// ✅ Route untuk healthcheck
+app.get('/kaithheathcheck', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
