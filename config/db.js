@@ -1,15 +1,17 @@
-import mysql from 'mysql2'
+import pkg from 'pg'
+const { Pool } = pkg;
 
-const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'admin123',
-    database: 'db_recipes'
-});
+const db = new Pool({
+    host: "9qasp5v56q8ckkf5dc.leapcellpool.com",
+    user: "vyuagxnivjqpaocwidgs",
+    password: "lmytjdkygrfxriixhtaebxarqxbgfr",
+    database: "ovazhjkuhryqtkqekcxi",
+    port: 6438
+})
 
-db.getConnection((err) => {
+db.connect((err) => {
     if (err) throw err;
-    console.log('Terhubung ke database MYSQL');
+    console.log('Terhubung ke database');
 })
 
 export default db;
